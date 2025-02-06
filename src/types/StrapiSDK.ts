@@ -118,6 +118,7 @@ export interface QueryParams {
 export enum RoleTypes {
 	ADULT_ANIME_WATCHER = "adult_anime_watcher",
 	ANIME_WATCHER = "anime_watcher",
+	ANIME_PAGE_ADMIN = "anime_page_admin",
 }
 
 export interface Role {

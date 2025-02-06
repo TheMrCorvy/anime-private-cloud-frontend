@@ -21,12 +21,7 @@ export interface UserCookie extends MeResponse {}
 
 export type CookieFound = JwtCookie | UserCookie | null;
 
-export const setCookie = async (
-	cookieName: CookiesList,
-	cookieObject: Object
-) => {
-	"use server";
-
+export const setCookie = (cookieName: CookiesList, cookieObject: Object) => {
 	const cookie = { cookieObject };
 
 	cookies().set(cookieName, JSON.stringify(cookie), {
@@ -34,11 +29,7 @@ export const setCookie = async (
 	});
 };
 
-export const getCookie = async (
-	cookieName: CookiesList
-): Promise<CookieFound> => {
-	"use server";
-
+export const getCookie = (cookieName: CookiesList): CookieFound => {
 	const cookie = cookies().get(cookieName)?.value;
 	if (!cookie) return null;
 
@@ -69,9 +60,7 @@ export const getCookie = async (
 // 	return res;
 // };
 
-export const removeCookie = async (cookieName: CookiesList) => {
-	"use server";
-
+export const removeCookie = (cookieName: CookiesList) => {
 	if (isFeatureFlagEnabled(FeatureNames.ENABLE_USERS_LOGIN)) {
 		cookies().delete(cookieName);
 	}

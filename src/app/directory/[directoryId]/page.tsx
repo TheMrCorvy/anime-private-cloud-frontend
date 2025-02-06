@@ -34,10 +34,7 @@ export default async function Directories({ params }: Page) {
 
 	const foundDirectory = directory.data as Directory;
 
-	if (
-		foundDirectory.adult &&
-		user.role.type !== RoleTypes.ADULT_ANIME_WATCHER
-	) {
+	if (foundDirectory.adult && user.role.type === RoleTypes.ANIME_WATCHER) {
 		return notFound();
 	}
 

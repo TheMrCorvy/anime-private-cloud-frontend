@@ -25,4 +25,6 @@ export enum StrapiApiRoutes {
 	directories = "/api/directories/",
 }
 
-export enum NasApiRoutes {}
+export enum NasApiRoutes {
+	serveAnimeEpisode = "/api/serve-anime-episode/",
+}

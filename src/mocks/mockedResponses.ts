@@ -99,7 +99,7 @@ export const mockAnimeEpisodes: AnimeEpisode[] = [
 	{
 		id: 1,
 		display_name: "1 - first anime",
-		file_path: "C:/first_anime/1-first_anime.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:22:44.167Z"),
 		updatedAt: new Date("2024-09-04T16:22:44.167Z"),
 		parent_directory: {
@@ -116,7 +116,7 @@ export const mockAnimeEpisodes: AnimeEpisode[] = [
 	{
 		id: 2,
 		display_name: "2 - first anime",
-		file_path: "C:/first_anime/2-first_anime.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:23:16.014Z"),
 		updatedAt: new Date("2024-09-04T16:23:16.014Z"),
 		parent_directory: {
@@ -193,7 +193,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 1,
 		display_name: "1 - first anime",
-		file_path: "C:/first_anime/1-first_anime.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:22:44.167Z"),
 		updatedAt: new Date("2024-09-04T16:22:44.167Z"),
 		parent_directory: {
@@ -210,7 +210,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 2,
 		display_name: "2 - first anime",
-		file_path: "C:/first_anime/2-first_anime.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:23:16.014Z"),
 		updatedAt: new Date("2024-09-04T16:23:16.014Z"),
 		parent_directory: {
@@ -227,7 +227,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 3,
 		display_name: "1 - second anime",
-		file_path: "C:/second_anime/1-second_anime.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:23:53.389Z"),
 		updatedAt: new Date("2024-09-04T16:23:53.389Z"),
 		parent_directory: {
@@ -244,7 +244,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 4,
 		display_name: "2 - second anime",
-		file_path: "C:/second_anime/2-second_anime.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:24:51.040Z"),
 		updatedAt: new Date("2024-09-04T16:24:51.040Z"),
 		parent_directory: {
@@ -261,7 +261,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 5,
 		display_name: "1 - anime with sub folder",
-		file_path: "C:/anime_with_sub_folder/1-anime_with_sub_folder.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:26:12.142Z"),
 		updatedAt: new Date("2024-09-04T16:27:02.419Z"),
 		parent_directory: {
@@ -278,7 +278,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 6,
 		display_name: "2 - anime with sub folder",
-		file_path: "C:/anime_with_sub_folder/2-anime_with_sub_folder.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:27:38.362Z"),
 		updatedAt: new Date("2024-09-04T16:27:38.362Z"),
 		parent_directory: {
@@ -295,7 +295,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 7,
 		display_name: "1 - sub folder",
-		file_path: "C:/anime_with_sub_folder/sub_folder/1-sub_folder.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:28:29.974Z"),
 		updatedAt: new Date("2024-09-04T16:28:29.974Z"),
 		parent_directory: {
@@ -312,7 +312,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 8,
 		display_name: "2 - sub folder",
-		file_path: "C:/anime_with_sub_folder/sub_folder/2-sub_folder.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:28:58.541Z"),
 		updatedAt: new Date("2024-09-04T16:28:58.541Z"),
 		parent_directory: {
@@ -329,7 +329,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 9,
 		display_name: "1 - adult anime",
-		file_path: "C:/adult_anime/1-adult_anime.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:30:37.769Z"),
 		updatedAt: new Date("2024-09-04T16:30:37.769Z"),
 		parent_directory: {
@@ -346,7 +346,7 @@ export const mockAnimeEpisodesResponse: AnimeEpisode[] = [
 	{
 		id: 10,
 		display_name: "2 - adult anime",
-		file_path: "C:/adult_anime/2-adult_anime.mp4",
+		file_path: "src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME,
 		createdAt: new Date("2024-09-04T16:31:05.930Z"),
 		updatedAt: new Date("2024-09-04T16:31:05.930Z"),
 		parent_directory: {

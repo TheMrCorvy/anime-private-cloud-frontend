@@ -65,7 +65,10 @@ export default async function AnimeEpisodes({ params }: Page) {
 				<video
 					controls
 					width="800"
-					src={ApiRoutes.streamAnimeEpisode}
+					src={
+						ApiRoutes.streamAnimeEpisode +
+						foundAnimeEpisode.documentId
+					}
 					style={{ maxWidth: "100%" }}
 				>
 					Your browser does not support the video tag.

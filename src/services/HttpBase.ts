@@ -2,11 +2,11 @@ import logData from "@/utils/logData";
 import { FeatureNames, isFeatureFlagEnabled } from "./featureFlagService";
 
 export enum HttpMethod {
-	GET,
-	PUT,
-	POST,
-	DELETE,
-	OPTIONS,
+	GET = "GET",
+	PUT = "PUT",
+	POST = "POST",
+	DELETE = "DELETE",
+	OPTIONS = "OPTIONS",
 }
 
 export interface RequestInformation {

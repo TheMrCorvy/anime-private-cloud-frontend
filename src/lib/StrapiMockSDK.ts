@@ -9,6 +9,7 @@ import {
 	registerTokens,
 } from "@/mocks/mockedResponses";
 import { FeatureNames } from "@/services/featureFlagService";
+import { HttpMethod } from "@/services/HttpBase";
 import type {
 	Register,
 	StrapiSDK,
@@ -34,7 +35,7 @@ import QueryString from "qs";
 const host = process.env.STRAPI_API_HOST as string;
 
 const register: Register = async (req) => {
-	const method = "POST";
+	const method = HttpMethod.POST;
 	const url = StrapiApiRoutes.register;
 	const queryParams = req.queryParams
 		? QueryString.stringify(req.queryParams)
@@ -55,7 +56,7 @@ const register: Register = async (req) => {
 };
 
 const login: Login = async (req) => {
-	const method = "POST";
+	const method = HttpMethod.POST;
 	const url = StrapiApiRoutes.login;
 	const queryParams = req.queryParams
 		? QueryString.stringify(req.queryParams)
@@ -76,7 +77,7 @@ const login: Login = async (req) => {
 };
 
 const me: Me = async (req) => {
-	const method = "GET";
+	const method = HttpMethod.GET;
 	const url = StrapiApiRoutes.me;
 	const queryParams = req.queryParams
 		? QueryString.stringify(req.queryParams)
@@ -97,7 +98,7 @@ const me: Me = async (req) => {
 };
 
 const validateRegisterToken: ValidateRegisterToken = async (req) => {
-	const method = "GET";
+	const method = HttpMethod.GET;
 	const url = StrapiApiRoutes.registerToken;
 	const queryParams = req.queryParams
 		? QueryString.stringify(req.queryParams)
@@ -163,7 +164,7 @@ const invalidateRegisterToken: InvalidateRegisterToken = async (req) => {
 };
 
 const getSingleAnimeEpisode: GetSingleAnimeEpisode = async (req) => {
-	const method = "GET";
+	const method = HttpMethod.GET;
 	const url = StrapiApiRoutes.singleAnimeEpisode;
 	const queryParams = req.queryParams
 		? QueryString.stringify(req.queryParams)
@@ -197,7 +198,7 @@ const getSingleAnimeEpisode: GetSingleAnimeEpisode = async (req) => {
 };
 
 const getAnimeEpisodes: GetAnimeEpisodes = async (req) => {
-	const method = "GET";
+	const method = HttpMethod.GET;
 	const url = StrapiApiRoutes.animeEpisodes;
 	const queryParams = req.queryParams
 		? QueryString.stringify(req.queryParams)
@@ -223,7 +224,7 @@ const getAnimeEpisodes: GetAnimeEpisodes = async (req) => {
 };
 
 const getSingleDirectory: GetSingleDirectory = async (req) => {
-	const method = "GET";
+	const method = HttpMethod.GET;
 	const url = StrapiApiRoutes.singleDirectory;
 	const queryParams = req.queryParams
 		? QueryString.stringify(req.queryParams)
@@ -264,7 +265,7 @@ const getSingleDirectory: GetSingleDirectory = async (req) => {
 };
 
 const getDirectories: GetDirectories = async (req) => {
-	const method = "GET";
+	const method = HttpMethod.GET;
 	const url = StrapiApiRoutes.directories;
 	const queryParams = req.queryParams
 		? QueryString.stringify(req.queryParams)

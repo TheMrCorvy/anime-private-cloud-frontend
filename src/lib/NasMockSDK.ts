@@ -3,6 +3,7 @@ import { HttpMethod } from "@/services/HttpBase";
 import {
 	CaseRangeAvailableOnReqHeaders,
 	CaseRagneNotSatisfiable,
+	ServeEpisodeResponse,
 	ServeEpisodeRequest,
 } from "@/types/NasSDK";
 import logData from "@/utils/logData";
@@ -15,10 +16,9 @@ const host = process.env.NAS_API_HOST as string;
 export default class NasMockSDK {
 	public async serveEpisode(
 		req: ServeEpisodeRequest
-	): Promise<CaseRagneNotSatisfiable | CaseRangeAvailableOnReqHeaders> {
+	): Promise<ServeEpisodeResponse> {
 		const method = HttpMethod.GET;
 		const url = NasApiRoutes.serveAnimeEpisode;
-
 		const uri = `${host}${url}/${req.filePath}`;
 
 		logData({
@@ -31,7 +31,6 @@ export default class NasMockSDK {
 		});
 
 		const localFilePath = join(process.cwd(), req.filePath);
-
 		const fileMetadata = statSync(localFilePath);
 		const range = req.range;
 
@@ -59,7 +58,6 @@ export default class NasMockSDK {
 
 		const chunkSize = end - start + 1;
 		const stream = createReadStream(localFilePath, { start, end });
-
 		const headers: HeadersInit = {
 			"Content-Range": `bytes ${start}-${end}/${fileMetadata.size}`,
 			"Accept-Ranges": "bytes",

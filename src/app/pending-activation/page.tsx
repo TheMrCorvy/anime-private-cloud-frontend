@@ -19,7 +19,8 @@ export default async function PendingUserActivation() {
 	if (
 		user.role &&
 		(user.role.type === RoleTypes.ADULT_ANIME_WATCHER ||
-			user.role.type === RoleTypes.ANIME_WATCHER)
+			user.role.type === RoleTypes.ANIME_WATCHER ||
+			user.role.type === RoleTypes.ANIME_PAGE_ADMIN)
 	) {
 		return redirect(WebRoutes.home);
 	}

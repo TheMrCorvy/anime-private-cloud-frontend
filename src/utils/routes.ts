@@ -6,6 +6,7 @@ export enum WebRoutes {
 	directory = "/directory/",
 	animeEpisode = "/anime-episode/",
 	pendingUserActivation = "/pending-activation/",
+	animesWatched = "/animes-watched/",
 }
 
 export enum ApiRoutes {
@@ -24,4 +25,6 @@ export enum StrapiApiRoutes {
 	directories = "/api/directories/",
 }
 
-export enum NasApiRoutes {}
+export enum NasApiRoutes {
+	serveAnimeEpisode = "/api/serve-anime-episode/",
+}

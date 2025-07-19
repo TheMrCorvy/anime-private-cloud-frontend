@@ -2,10 +2,10 @@ import DirectoriesSidebar from "@/components/layout/DirectoriesSidebar";
 import DirectoryListItem from "@/components/layout/DirectoryListItem";
 import MainContainer from "@/components/layout/MainContainer";
 import TopNavigation from "@/components/layout/TopNavigation";
-import { navbarItems } from "@/mocks/topNavigationItems";
+import generateNavbarItems from "@/services/generateNavbarItems";
 import { StrapiService } from "@/services/StrapiService";
 import { Directory } from "@/types/StrapiSDK";
-import { CookiesList, getCookie, JwtCookie } from "@/utils/cookies";
+import { CookiesList, getCookie, JwtCookie, UserCookie } from "@/utils/cookies";
 import { WebRoutes } from "@/utils/routes";
 
 import { Fragment } from "react";
@@ -62,7 +62,7 @@ export default async function Home() {
 	return (
 		<main className="absolute flex flex-col justify-center min-h-[100%] w-full bg-slate-900 pt-16">
 			<TopNavigation
-				navbarSections={navbarItems}
+				navbarSections={generateNavbarItems()}
 				position="static"
 				className="h-16 bg-slate-800 text-white fixed top-0 right-0"
 			/>

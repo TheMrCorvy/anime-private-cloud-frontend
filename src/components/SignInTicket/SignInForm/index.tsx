@@ -69,7 +69,8 @@ const SignInForm: FC<Props> = ({ isRegisterForm, tokenId, errorMessage }) => {
 		if (
 			!("role" in userWithRole) ||
 			(userWithRole.role.type !== RoleTypes.ADULT_ANIME_WATCHER &&
-				userWithRole.role.type !== RoleTypes.ANIME_WATCHER)
+				userWithRole.role.type !== RoleTypes.ANIME_WATCHER &&
+				userWithRole.role.type !== RoleTypes.ANIME_PAGE_ADMIN)
 		) {
 			return redirect(WebRoutes.pendingUserActivation);
 		}

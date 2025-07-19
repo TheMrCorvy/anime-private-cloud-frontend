@@ -7,6 +7,7 @@ import { ApiRoutes, WebRoutes } from "@/utils/routes";
 import { AnimeEpisode } from "@/types/StrapiSDK";
 
 import { Link, Divider } from "@nextui-org/react";
+import { FeatureNames, isFeatureFlagEnabled } from "@/services/featureFlagService";
 
 export default async function AnimeEpisodes({ params }: Page) {
 	const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
@@ -31,6 +32,13 @@ export default async function AnimeEpisodes({ params }: Page) {
 	}
 
 	const foundAnimeEpisode = animeEpisode.data as AnimeEpisode;
+	let videoSrc = ''
+
+	if (isFeatureFlagEnabled(FeatureNames.CONSUME_NAS_FILES)) {
+		videoSrc = '';
+	}else {
+		videoSrc = `${ApiRoutes.streamAnimeEpisode}`;
+	}
 
 	return (
 		<article className="flex flex-col">
@@ -65,10 +73,7 @@ export default async function AnimeEpisodes({ params }: Page) {
 				<video
 					controls
 					width="800"
-					src={
-						ApiRoutes.streamAnimeEpisode +
-						foundAnimeEpisode.documentId
-					}
+					src={videoSrc}
 					style={{ maxWidth: "100%" }}
 				>
 					Your browser does not support the video tag.

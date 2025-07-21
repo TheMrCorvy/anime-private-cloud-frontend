@@ -7,7 +7,11 @@ import { CookiesList, setCookie } from "@/utils/cookies";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-	const response = NextResponse.redirect(req.headers.get("host") as string);
+	const host = req.headers.get("host");
+	const protocol = req.headers.get("x-forwarded-proto") || "https";
+	const redirectUrl = `${protocol}://${host}/`;
+
+	const response = NextResponse.redirect(redirectUrl);
 
 	if (isFeatureFlagEnabled(FeatureNames.ENABLE_USERS_LOGIN)) {
 		return response;

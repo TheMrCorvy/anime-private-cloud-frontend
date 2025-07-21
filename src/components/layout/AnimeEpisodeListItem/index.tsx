@@ -13,7 +13,7 @@ interface Props {
 }
 
 const AnimeEpisodeListItem: FC<Props> = ({ episodeId, displayName }) => (
-	<Link href={WebRoutes.animeEpisode + episodeId}>
+	<a href={WebRoutes.animeEpisode + episodeId}>
 		<Card
 			className="py-4 bg-cyan-800 hover:scale-105 w-full"
 			isPressable
@@ -24,7 +24,7 @@ const AnimeEpisodeListItem: FC<Props> = ({ episodeId, displayName }) => (
 				<Video size={24} color="currentColor" className="ml-7 mt-1" />
 			</CardHeader>
 		</Card>
-	</Link>
+	</a>
 );
 
 export default AnimeEpisodeListItem;

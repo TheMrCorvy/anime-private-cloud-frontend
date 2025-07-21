@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
 
 	const filePath = join(
 		process.cwd(),
-		"src/mocks/mockAnimeEpisodes/" + process.env.MOCKED_ANIME_EPISODE_FILE_NAME
+		"src/mocks/mockAnimeEpisodes/" + process.env.MOCK_FILE_NAME
 	);
 
 	try {

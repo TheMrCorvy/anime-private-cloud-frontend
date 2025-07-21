@@ -20,7 +20,7 @@ const user = {
 	updatedAt: new Date("2024-08-01T13:25:55.789Z"),
 };
 
-export const mockUserToken = process.env.MOCK_USER_TOKEN || "";
+export const mockUserToken = process.env.MOCK_JSON_WEB_TOKEN || "";
 
 export const mockRegisterResponse: RegisterResponse = {
 	jwt: mockUserToken,

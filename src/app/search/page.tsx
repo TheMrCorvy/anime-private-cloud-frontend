@@ -5,6 +5,7 @@ import { StrapiService } from "@/services/StrapiService";
 import { CookiesList, getCookie, JwtCookie, UserCookie } from "@/utils/cookies";
 import { WebRoutes } from "@/utils/routes";
 import DirectoryListItem from "@/components/layout/DirectoryListItem";
+import SearchInput from "@/components/SearchInput";
 
 export default async function Search({ searchParams }: Page) {
 	const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
@@ -28,6 +29,9 @@ export default async function Search({ searchParams }: Page) {
 
 	return (
 		<section>
+			<div className="mb-5 xs:block md:hidden">
+				<SearchInput defaultValue={searchParams.query as string} />
+			</div>
 			{result.data.map((directory, i) => (
 				<DirectoryListItem
 					key={`search-result-page-${directory.id}-${i}`}

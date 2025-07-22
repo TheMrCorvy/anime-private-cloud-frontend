@@ -138,7 +138,7 @@ const SignInForm: FC<Props> = ({ isRegisterForm, tokenId, errorMessage }) => {
 		<Fragment>
 			<div
 				data-testid="sign-in-form"
-				className="h-full w-4/12 border-dashed border-white border-l-3"
+				className="w-full lg:h-full h-4/12 lg:w-4/12 border-dashed border-white border-t-3 lg:border-t-0 lg:border-l-3"
 			>
 				<form
 					action={handleSubmit}

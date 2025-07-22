@@ -7,21 +7,22 @@ export const navbarItems: NavbarSection[] = [
 	{
 		items: [
 			{
-				label: "Home",
+				label: "Inicio",
 				href: WebRoutes.home,
 			},
 		],
 		justify: "start",
+		className:'items-center hidden sm:flex gap-4',
 	},
 	{
 		items: [
 			{
 				label: "Buscar",
-				href: WebRoutes.home,
+				href: WebRoutes.search,
 				children: <SearchInput />,
 			},
 		],
-		className: "flex",
+		className: "",
 		justify: "center",
 	},
 	{
@@ -32,7 +33,7 @@ export const navbarItems: NavbarSection[] = [
 				children: <SessionHandlerComponent />,
 			},
 		],
-		className: "flex",
+		className: "hidden sm:flex gap-4 flex",
 		justify: "end",
 	},
 ];
@@ -46,7 +47,7 @@ export const pendingActivationNavbar: NavbarSection[] = [
 				children: <SessionHandlerComponent />,
 			},
 		],
-		className: "flex",
+		className: "hidden sm:flex gap-4 flex",
 		justify: "end",
 	},
 ];
@@ -60,6 +61,7 @@ export const navbarItemsTest: NavbarSection[] = [
 			},
 		],
 		justify: "start",
+		className: 'hidden sm:flex gap-4'
 	},
 	{
 		items: [
@@ -69,6 +71,7 @@ export const navbarItemsTest: NavbarSection[] = [
 			},
 		],
 		justify: "center",
+		className: 'hidden sm:flex gap-4'
 	},
 	{
 		items: [
@@ -78,5 +81,6 @@ export const navbarItemsTest: NavbarSection[] = [
 			},
 		],
 		justify: "end",
+		className: 'hidden sm:flex gap-4'
 	},
 ];

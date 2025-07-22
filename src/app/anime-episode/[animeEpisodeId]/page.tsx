@@ -42,7 +42,7 @@ export default async function AnimeEpisodes({ params }: Page) {
 
 	return (
 		<article className="flex flex-col">
-			<section className={`flex flex-row w-full mb-5 justify-between`}>
+			<section className={`flex flex-col lg:flex-row w-full mb-5 justify-between`}>
 				<Link
 					href={WebRoutes.home}
 					size="lg"
@@ -52,7 +52,7 @@ export default async function AnimeEpisodes({ params }: Page) {
 				>
 					Volver al Inicio
 				</Link>
-				<h1 className={`text-xl font-medium capitalize`}>
+				<h1 className={`text-xl font-medium capitalize mt-3 lg:mt-0`}>
 					{foundAnimeEpisode.display_name}
 				</h1>
 				<Link
@@ -64,6 +64,7 @@ export default async function AnimeEpisodes({ params }: Page) {
 					color="foreground"
 					underline="always"
 					showAnchorIcon
+					className="mt-3 lg:mt-0"
 				>
 					Volver a la Carpeta Anterior
 				</Link>

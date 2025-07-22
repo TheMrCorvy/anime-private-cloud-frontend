@@ -24,11 +24,10 @@ const QrCode: FC<Props> = ({ isRegisterForm, value, invitationNumber }) => {
 	return (
 		<div
 			data-testid="qr-code-component"
-			className="h-full w-2/12 border-dashed border-white bg-white border-x-3 flex justify-center items-center text-center text-black"
+			className="w-full lg:h-full h-1/6 lg:w-1/6 border-dashed border-white bg-white border-y-3 lg:border-y-0 lg:border-x-3 flex justify-center items-center text-center text-black"
 		>
-			<div className="-rotate-90">
+			<div className="lg:-rotate-90">
 				{process.env.NODE_ENV !== "test" && <Barcode value={value} />}
-
 				<p className="text-sm">
 					Invitation Nº:{" "}
 					<span className="font-bold">

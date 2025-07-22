@@ -12,7 +12,7 @@ export const navbarItems: NavbarSection[] = [
 			},
 		],
 		justify: "start",
-		className:'flexitems-center'
+		className:'items-center hidden sm:flex gap-4',
 	},
 	{
 		items: [
@@ -22,7 +22,7 @@ export const navbarItems: NavbarSection[] = [
 				children: <SearchInput />,
 			},
 		],
-		className: "hidden md:block py-3",
+		className: "",
 		justify: "center",
 	},
 	{

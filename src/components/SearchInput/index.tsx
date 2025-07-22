@@ -4,7 +4,11 @@ import { redirect } from "next/navigation";
 import SearchTwoLines from "../icons/SearchTwoLines";
 import { WebRoutes } from "@/utils/routes";
 
-const SearchInput: FC = () => {
+export interface Props {
+	defaultValue?: string;
+}
+
+const SearchInput: FC<Props> = ({defaultValue}) => {
 	const search = async (formData: FormData) => {
 		"use server";
 		redirect(
@@ -34,6 +38,7 @@ const SearchInput: FC = () => {
 				}
 				type="text"
 				className="max-w-xs"
+				defaultValue={defaultValue || ''}
 			/>
 		</form>
 	);

@@ -41,7 +41,7 @@ export default async function Directories({ params }: Page) {
 	return (
 		<article className="flex flex-col">
 			<section
-				className={`flex flex-row w-full mb-5 ${foundDirectory.parent_directory ? "justify-between" : "relative"}`}
+				className={`flex flex-col lg:flex-row w-full mb-5 ${foundDirectory.parent_directory ? "justify-between" : "relative"}`}
 			>
 				<Link
 					href={WebRoutes.home}
@@ -53,7 +53,7 @@ export default async function Directories({ params }: Page) {
 					Volver al Inicio
 				</Link>
 				<h1
-					className={`text-xl font-medium capitalize ${foundDirectory.parent_directory ? "" : "absolute top-0 right-1/2"}`}
+					className={`text-xl font-medium capitalize mt-3 lg:mt-0 ${foundDirectory.parent_directory ? "" : "lg:absolute top-0 right-1/2"}`}
 				>
 					{foundDirectory.display_name}
 				</h1>
@@ -68,6 +68,7 @@ export default async function Directories({ params }: Page) {
 							color="foreground"
 							underline="always"
 							showAnchorIcon
+							className="mt-3 lg:mt-0"
 						>
 							Volver a la Carpeta Anterior
 						</Link>
@@ -83,7 +84,7 @@ export default async function Directories({ params }: Page) {
 					/>
 				))}
 			</section>
-			<section className="grid grid-cols-2 sm:grid-cols-4 gap-5 ">
+			<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
 				{foundDirectory.anime_episodes &&
 					foundDirectory.anime_episodes.map((ep, i) => (
 						<AnimeEpisodeListItem

@@ -1,6 +1,6 @@
 import {
-	FeatureNames,
-	isFeatureFlagEnabled,
+    FeatureNames,
+    isFeatureFlagEnabled,
 } from "@/services/featureFlagService";
 
 import { cookies } from "next/headers";
@@ -9,12 +9,12 @@ import { cookies } from "next/headers";
 import { MeResponse } from "@/types/StrapiSDK";
 
 export enum CookiesList {
-	USER = "user",
-	JWT = "jwt",
+    USER = "user",
+    JWT = "jwt",
 }
 
 export interface JwtCookie {
-	jwt: string;
+    jwt: string;
 }
 
 export interface UserCookie extends MeResponse {}
@@ -22,18 +22,18 @@ export interface UserCookie extends MeResponse {}
 export type CookieFound = JwtCookie | UserCookie | null;
 
 export const setCookie = (cookieName: CookiesList, cookieObject: Object) => {
-	const cookie = { cookieObject };
+    const cookie = { cookieObject };
 
-	cookies().set(cookieName, JSON.stringify(cookie), {
-		httpOnly: true,
-	});
+    cookies().set(cookieName, JSON.stringify(cookie), {
+        httpOnly: true,
+    });
 };
 
 export const getCookie = (cookieName: CookiesList): CookieFound => {
-	const cookie = cookies().get(cookieName)?.value;
-	if (!cookie) return null;
+    const cookie = cookies().get(cookieName)?.value;
+    if (!cookie) return null;
 
-	return JSON.parse(cookie).cookieObject;
+    return JSON.parse(cookie).cookieObject;
 };
 
 // export const updateCookie = async (
@@ -61,7 +61,7 @@ export const getCookie = (cookieName: CookiesList): CookieFound => {
 // };
 
 export const removeCookie = (cookieName: CookiesList) => {
-	if (isFeatureFlagEnabled(FeatureNames.ENABLE_USERS_LOGIN)) {
-		cookies().delete(cookieName);
-	}
+    if (isFeatureFlagEnabled(FeatureNames.ENABLE_USERS_LOGIN)) {
+        cookies().delete(cookieName);
+    }
 };

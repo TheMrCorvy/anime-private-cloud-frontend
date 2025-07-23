@@ -3,18 +3,18 @@ import DirectoriesSidebar from ".";
 import { mockedDirectories } from "@/mocks/sidebarMocks";
 
 const meta = {
-	title: "Layout/DirectoriesSidebar",
-	component: DirectoriesSidebar,
-	parameters: {
-		layout: "centered",
-	},
+    title: "Layout/DirectoriesSidebar",
+    component: DirectoriesSidebar,
+    parameters: {
+        layout: "centered",
+    },
 } satisfies Meta<typeof DirectoriesSidebar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-	args: {
-		directories: mockedDirectories,
-	},
+    args: {
+        directories: mockedDirectories,
+    },
 };

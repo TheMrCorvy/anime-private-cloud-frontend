@@ -1,8 +1,8 @@
 import {
-	mockNextImage,
-	mockNextLink,
-	mockNextServer,
-	mockUseRouter,
+    mockNextImage,
+    mockNextLink,
+    mockNextServer,
+    mockUseRouter,
 } from "@/mocks/jestSetup";
 import "@testing-library/jest-dom";
 

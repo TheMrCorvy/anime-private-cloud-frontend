@@ -4,23 +4,23 @@ import DirectoriesSidebar from "./index";
 import { mockedDirectories } from "@/mocks/sidebarMocks";
 
 describe("DirectoriesSidebar", () => {
-	it("should render properly", () => {
-		render(<DirectoriesSidebar directories={mockedDirectories} />);
+    it("should render properly", () => {
+        render(<DirectoriesSidebar directories={mockedDirectories} />);
 
-		const container = screen.queryByTestId("directories-sidebar");
+        const container = screen.queryByTestId("directories-sidebar");
 
-		expect(container).toBeInTheDocument();
-	});
+        expect(container).toBeInTheDocument();
+    });
 
-	it("should render inner components", () => {
-		render(<DirectoriesSidebar directories={mockedDirectories} />);
+    it("should render inner components", () => {
+        render(<DirectoriesSidebar directories={mockedDirectories} />);
 
-		const firstItem = screen.getByText(mockedDirectories[0].label);
-		const lastItem = screen.getByText(
-			mockedDirectories[mockedDirectories.length - 1].label
-		);
+        const firstItem = screen.getByText(mockedDirectories[0].label);
+        const lastItem = screen.getByText(
+            mockedDirectories[mockedDirectories.length - 1].label
+        );
 
-		expect(firstItem).toBeInTheDocument();
-		expect(lastItem).toBeInTheDocument();
-	});
+        expect(firstItem).toBeInTheDocument();
+        expect(lastItem).toBeInTheDocument();
+    });
 });

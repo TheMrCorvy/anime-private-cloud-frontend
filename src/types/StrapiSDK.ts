@@ -1,47 +1,47 @@
 /** SDK Entities */
 export interface Request {
-	headers?: HeadersInit;
-	queryParams?: QueryParams;
+    headers?: HeadersInit;
+    queryParams?: QueryParams;
 }
 
 export interface ErrorObject {
-	status: number;
-	name: string;
-	message: string;
-	details: Object;
+    status: number;
+    name: string;
+    message: string;
+    details: Object;
 }
 
 interface PluralResult {
-	meta: {
-		pagination?: PaginationObject;
-	};
+    meta: {
+        pagination?: PaginationObject;
+    };
 }
 
 export interface Response extends PluralResult {
-	error?: ErrorObject;
-	message?: string;
-	ok: boolean;
-	status: number;
+    error?: ErrorObject;
+    message?: string;
+    ok: boolean;
+    status: number;
 }
 
 export interface NotFoundResponse extends Response {
-	data: null;
+    data: null;
 }
 
 export interface PaginationQuery {
-	page?: number;
-	pageSize?: number;
+    page?: number;
+    pageSize?: number;
 }
 
 export interface PaginationObject {
-	page: number;
-	pageSize: number;
-	pageCount: number;
-	total: number;
+    page: number;
+    pageSize: number;
+    pageCount: number;
+    total: number;
 }
 
 interface QueryObject {
-	[key: string]: string | string[] | QueryObject;
+    [key: string]: string | string[] | QueryObject;
 }
 
 type Equal = string | boolean | number | null;
@@ -64,237 +64,237 @@ type Not = QueryObject[];
 type Or = QueryObject[];
 
 interface QueryFilters {
-	$and?: And;
-	$or?: Or;
-	$not?: Not;
-	$eq?: Equal;
-	$ne?: NotEqual;
-	$in?: IncludedIn;
-	$notIn?: NotIncludedIn;
-	$lt?: LessThan;
-	$lte?: LessThanOrEqual;
-	$gt?: GreaterThan;
-	$gte?: GreaterThanOrEqual;
-	$between?: Between;
-	$contains?: Contains;
-	$notContains?: NotContains;
-	$startsWith?: StartsWith;
-	$endsWith?: EndsWith;
-	$null?: Null;
-	$notNull?: NotNull;
+    $and?: And;
+    $or?: Or;
+    $not?: Not;
+    $eq?: Equal;
+    $ne?: NotEqual;
+    $in?: IncludedIn;
+    $notIn?: NotIncludedIn;
+    $lt?: LessThan;
+    $lte?: LessThanOrEqual;
+    $gt?: GreaterThan;
+    $gte?: GreaterThanOrEqual;
+    $between?: Between;
+    $contains?: Contains;
+    $notContains?: NotContains;
+    $startsWith?: StartsWith;
+    $endsWith?: EndsWith;
+    $null?: Null;
+    $notNull?: NotNull;
 }
 
 type QueryFiltersRecord = Partial<
-	Record<
-		keyof Directory | keyof AnimeEpisode | keyof ExtraKeysForQueryParams,
-		QueryFilters
-	>
+    Record<
+        keyof Directory | keyof AnimeEpisode | keyof ExtraKeysForQueryParams,
+        QueryFilters
+    >
 >;
 
 interface ExtraKeysForQueryParams {
-	token: string;
-	name: string;
-	type: RoleTypes | string;
-	email: string;
-	username: string;
-	id: number | string;
-	provider: string;
-	blocked: boolean;
-	confirmed: boolean;
-	used: null | boolean;
+    token: string;
+    name: string;
+    type: RoleTypes | string;
+    email: string;
+    username: string;
+    id: number | string;
+    provider: string;
+    blocked: boolean;
+    confirmed: boolean;
+    used: null | boolean;
 }
 
 export interface QueryParams {
-	populate?: string | string[] | QueryObject;
-	fields?: string | string[];
-	sort?: string[];
-	filters?: QueryFiltersRecord;
-	pagination?: PaginationQuery;
-	publicationState?: string;
-	locale?: string | string[];
+    populate?: string | string[] | QueryObject;
+    fields?: string | string[];
+    sort?: string[];
+    filters?: QueryFiltersRecord;
+    pagination?: PaginationQuery;
+    publicationState?: string;
+    locale?: string | string[];
 }
 
 /** Strapi Entities */
 export enum RoleTypes {
-	ADULT_ANIME_WATCHER = "adult_anime_watcher",
-	ANIME_WATCHER = "anime_watcher",
-	ANIME_PAGE_ADMIN = "anime_page_admin",
+    ADULT_ANIME_WATCHER = "adult_anime_watcher",
+    ANIME_WATCHER = "anime_watcher",
+    ANIME_PAGE_ADMIN = "anime_page_admin",
 }
 
 export interface Role {
-	createdAt: Date;
-	id: number;
-	name: string;
-	updatedAt: Date;
-	type: RoleTypes | string;
-	description: string;
+    createdAt: Date;
+    id: number;
+    name: string;
+    updatedAt: Date;
+    type: RoleTypes | string;
+    description: string;
 }
 
 export interface User {
-	createdAt: Date;
-	updatedAt: Date;
-	email: string;
-	username: string;
-	id: number;
-	provider: string;
-	blocked: boolean;
-	confirmed: boolean;
-	role?: Role;
+    createdAt: Date;
+    updatedAt: Date;
+    email: string;
+    username: string;
+    id: number;
+    provider: string;
+    blocked: boolean;
+    confirmed: boolean;
+    role?: Role;
 }
 
 export interface RegisterToken {
-	id: number;
-	token: string;
-	user: string;
-	createdAt: Date;
-	updatedAt: Date;
-	used: null | boolean;
-	documentId: string;
+    id: number;
+    token: string;
+    user: string;
+    createdAt: Date;
+    updatedAt: Date;
+    used: null | boolean;
+    documentId: string;
 }
 
 export interface Directory {
-	id: number;
-	display_name: string;
-	directory_path: string;
-	createdAt: Date;
-	updatedAt: Date;
-	adult: boolean;
-	parent_directory?: Directory | null;
-	sub_directories?: Directory[];
-	documentId: string;
-	anime_episodes?: AnimeEpisode[];
+    id: number;
+    display_name: string;
+    directory_path: string;
+    createdAt: Date;
+    updatedAt: Date;
+    adult: boolean;
+    parent_directory?: Directory | null;
+    sub_directories?: Directory[];
+    documentId: string;
+    anime_episodes?: AnimeEpisode[];
 }
 
 export interface AnimeEpisode {
-	id: number;
-	display_name: string;
-	file_path: string;
-	createdAt: Date;
-	updatedAt: Date;
-	parent_directory?: Directory;
-	documentId: string;
+    id: number;
+    display_name: string;
+    file_path: string;
+    createdAt: Date;
+    updatedAt: Date;
+    parent_directory?: Directory;
+    documentId: string;
 }
 
 /** SDK Methods */
 export interface RegisterRequest extends Request {
-	email: string;
-	username: string;
-	password: string;
+    email: string;
+    username: string;
+    password: string;
 }
 
 export interface RegisterResponse extends Response {
-	jwt: string;
-	user: User;
+    jwt: string;
+    user: User;
 }
 
 export type Register = (params: RegisterRequest) => Promise<RegisterResponse>;
 
 export interface LoginRequest extends Request {
-	identifier: string;
-	password: string;
+    identifier: string;
+    password: string;
 }
 
 export interface LoginResponse extends Response {
-	jwt: string;
-	user: User;
+    jwt: string;
+    user: User;
 }
 
 export type Login = (params: LoginRequest) => Promise<LoginResponse>;
 
 export interface MeRequest extends Request {
-	jwt: string;
+    jwt: string;
 }
 
 export interface MeResponse extends Response, User {
-	role: Role;
+    role: Role;
 }
 
 export type Me = (params: MeRequest) => Promise<MeResponse>;
 
 export interface ValidateRegisterTokenRequest extends Request {
-	token: string;
+    token: string;
 }
 
 export interface ValidateRegisterTokenResponse extends Response {
-	data: null | RegisterToken[];
+    data: null | RegisterToken[];
 }
 
 export type ValidateRegisterToken = (
-	params: ValidateRegisterTokenRequest
+    params: ValidateRegisterTokenRequest
 ) => Promise<ValidateRegisterTokenResponse>;
 
 export interface InvalidateRegisterTokenRequest extends Request {
-	tokenId: string;
+    tokenId: string;
 }
 
 export interface InvalidateRegisterTokenResponse extends Response {
-	data: null | RegisterToken;
+    data: null | RegisterToken;
 }
 
 export type InvalidateRegisterToken = (
-	params: InvalidateRegisterTokenRequest
+    params: InvalidateRegisterTokenRequest
 ) => Promise<InvalidateRegisterTokenResponse>;
 
 export interface GetSingleDirectoryRequest extends Request {
-	jwt: string;
-	id: string;
+    jwt: string;
+    id: string;
 }
 
 export interface GetSingleDirectoryResponse extends Response {
-	data: Directory;
+    data: Directory;
 }
 
 export interface GetDirectoriesRequest extends Request {
-	jwt: string;
+    jwt: string;
 }
 
 export interface GetDirectoriesResponse extends Response {
-	data: Directory[];
+    data: Directory[];
 }
 
 export type GetDirectories = (
-	params: GetDirectoriesRequest
+    params: GetDirectoriesRequest
 ) => Promise<GetDirectoriesResponse>;
 
 export type GetSingleDirectory = (
-	params: GetSingleDirectoryRequest
+    params: GetSingleDirectoryRequest
 ) => Promise<GetSingleDirectoryResponse | NotFoundResponse>;
 
 export interface GetSingleAnimeEpisodeRequest extends Request {
-	jwt: string;
-	id: string;
+    jwt: string;
+    id: string;
 }
 
 export interface GetSingleAnimeEpisodeResponse extends Response {
-	data: AnimeEpisode;
+    data: AnimeEpisode;
 }
 
 export type GetSingleAnimeEpisode = (
-	params: GetSingleAnimeEpisodeRequest
+    params: GetSingleAnimeEpisodeRequest
 ) => Promise<GetSingleAnimeEpisodeResponse | NotFoundResponse>;
 
 export interface GetAnimeEpisodesRequest extends Request {
-	jwt: string;
-	parent_directory: number;
+    jwt: string;
+    parent_directory: number;
 }
 
 export interface GetAnimeEpisodesResponse extends Response {
-	data: AnimeEpisode[];
+    data: AnimeEpisode[];
 }
 
 export type GetAnimeEpisodes = (
-	params: GetAnimeEpisodesRequest
+    params: GetAnimeEpisodesRequest
 ) => Promise<GetAnimeEpisodesResponse>;
 
 /** SDK */
 export interface StrapiSDK {
-	register: Register;
-	login: Login;
-	me: Me;
-	validateRegisterToken: ValidateRegisterToken;
-	invalidateRegisterToken: InvalidateRegisterToken;
-	getDirectories: GetDirectories;
-	getSingleDirectory: GetSingleDirectory;
-	getSingleAnimeEpisode: GetSingleAnimeEpisode;
-	getAnimeEpisodes: GetAnimeEpisodes;
+    register: Register;
+    login: Login;
+    me: Me;
+    validateRegisterToken: ValidateRegisterToken;
+    invalidateRegisterToken: InvalidateRegisterToken;
+    getDirectories: GetDirectories;
+    getSingleDirectory: GetSingleDirectory;
+    getSingleAnimeEpisode: GetSingleAnimeEpisode;
+    getAnimeEpisodes: GetAnimeEpisodes;
 }

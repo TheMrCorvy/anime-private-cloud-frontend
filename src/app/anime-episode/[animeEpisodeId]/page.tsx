@@ -11,13 +11,21 @@ import {
     FeatureNames,
     isFeatureFlagEnabled,
 } from "@/services/featureFlagService";
+import SecureVideoPlayer from "@/components/SecureVideoPlayer";
 
 export default async function AnimeEpisodes({ params }: Page) {
     const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
     const user = (await getCookie(CookiesList.USER)) as UserCookie | null;
+    const consumeNasData = isFeatureFlagEnabled(FeatureNames.CONSUME_NAS_FILES);
+    const nasApiKey = process.env.NAS_API_KEY;
+    const nasBaseUrl = process.env.NAS_API_HOST;
 
     if (!jwt || !user) {
         return redirect(WebRoutes.login);
+    }
+
+    if ((!nasApiKey || !nasBaseUrl) && consumeNasData) {
+        return notFound();
     }
 
     const service = StrapiService();
@@ -35,13 +43,6 @@ export default async function AnimeEpisodes({ params }: Page) {
     }
 
     const foundAnimeEpisode = animeEpisode.data as AnimeEpisode;
-    let videoSrc = "";
-
-    if (isFeatureFlagEnabled(FeatureNames.CONSUME_NAS_FILES)) {
-        videoSrc = "";
-    } else {
-        videoSrc = `${ApiRoutes.streamAnimeEpisode}`;
-    }
 
     return (
         <article className="flex flex-col">
@@ -76,14 +77,22 @@ export default async function AnimeEpisodes({ params }: Page) {
             </section>
             <Divider className="mb-8" />
             <section>
-                <video
-                    controls
-                    width="800"
-                    src={videoSrc}
-                    style={{ maxWidth: "100%" }}
-                >
-                    Your browser does not support the video tag.
-                </video>
+                {consumeNasData ? (
+                    <SecureVideoPlayer
+                        filePath={foundAnimeEpisode.file_path}
+                        apiKey={nasApiKey as string}
+                        baseUrl={nasBaseUrl as string}
+                    />
+                ) : (
+                    <video
+                        controls
+                        width="800"
+                        src={ApiRoutes.streamAnimeEpisode}
+                        style={{ maxWidth: "100%" }}
+                    >
+                        Your browser does not support the video tag.
+                    </video>
+                )}
             </section>
         </article>
     );

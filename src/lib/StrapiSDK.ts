@@ -11,6 +11,7 @@ import type {
     GetDirectoriesResponse,
     GetAnimeEpisodesResponse,
     GetSingleAnimeEpisodeResponse,
+    GetAllDirectoriesResponse,
     RegisterRequest,
     LoginRequest,
     MeRequest,
@@ -20,6 +21,8 @@ import type {
     GetSingleDirectoryRequest,
     GetDirectoriesRequest,
     GetAnimeEpisodesRequest,
+    GetAllDirectoriesRequest,
+    Directory,
 } from "@/types/StrapiSDK";
 import { StrapiApiRoutes } from "@/utils/routes";
 import QueryString from "qs";
@@ -224,6 +227,22 @@ export default class StrapiSDK extends HttpBase {
             method,
             header: req.headers,
             requestOperation: "getAnimeEpisodes",
+            authToken: req.jwt,
+        });
+    }
+
+    public async getAllDirectories(
+        req: GetAllDirectoriesRequest
+    ): Promise<GetAllDirectoriesResponse> {
+        const method = HttpMethod.GET;
+        const url = StrapiApiRoutes.allDirectories;
+        const uri = this.buildUrlString({ url, params: req.queryParams });
+
+        return await this.executeRequest<GetAllDirectoriesResponse>({
+            url: uri,
+            method,
+            header: req.headers,
+            requestOperation: "getAllDirectories",
             authToken: req.jwt,
         });
     }

@@ -26,6 +26,8 @@ import type {
     GetDirectories,
     GetDirectoriesResponse,
     GetSingleDirectoryResponse,
+    GetAllDirectories,
+    GetAllDirectoriesResponse,
     NotFoundResponse,
 } from "@/types/StrapiSDK";
 import logData from "@/utils/logData";
@@ -290,6 +292,32 @@ const getDirectories: GetDirectories = async (req) => {
     })) as GetDirectoriesResponse;
 };
 
+const getAllDirectories: GetAllDirectories = async (req) => {
+    const method = HttpMethod.GET;
+    const url = StrapiApiRoutes.allDirectories;
+    const queryParams = req.queryParams
+        ? QueryString.stringify(req.queryParams)
+        : "";
+
+    const uri = `${host}${url}?${queryParams}`;
+
+    logData({
+        data: {
+            uri,
+            method,
+        },
+        ff: FeatureNames.LOG_EXTERNAL_HTTP_REQUESTS,
+        title: "getAllDirectories",
+    });
+
+    return (await Promise.resolve({
+        ok: true,
+        meta: {},
+        status: 200,
+        data: mockDirectories,
+    })) as GetAllDirectoriesResponse;
+};
+
 const StrapiMockSDK: StrapiSDK = {
     register,
     login,
@@ -300,6 +328,7 @@ const StrapiMockSDK: StrapiSDK = {
     getSingleDirectory,
     getAnimeEpisodes,
     getSingleAnimeEpisode,
+    getAllDirectories,
 };
 
 export default StrapiMockSDK;

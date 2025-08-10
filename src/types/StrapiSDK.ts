@@ -286,6 +286,18 @@ export type GetAnimeEpisodes = (
     params: GetAnimeEpisodesRequest
 ) => Promise<GetAnimeEpisodesResponse>;
 
+export interface GetAllDirectoriesRequest extends Request {
+    jwt: string;
+}
+
+export interface GetAllDirectoriesResponse extends Response {
+    data: Directory[];
+}
+
+export type GetAllDirectories = (
+    params: GetAllDirectoriesRequest
+) => Promise<GetAllDirectoriesResponse>;
+
 /** SDK */
 export interface StrapiSDK {
     register: Register;
@@ -297,4 +309,5 @@ export interface StrapiSDK {
     getSingleDirectory: GetSingleDirectory;
     getSingleAnimeEpisode: GetSingleAnimeEpisode;
     getAnimeEpisodes: GetAnimeEpisodes;
+    getAllDirectories: GetAllDirectories;
 }

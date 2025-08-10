@@ -38,14 +38,7 @@ export default async function RootLayout({
             const directoriesResponse = await service.getAllDirectories({
                 jwt: jwt.jwt,
                 queryParams: {
-                    filters: {
-                        parent_directory: {
-                            $null: true,
-                        },
-                        adult: {
-                            $eq: false,
-                        },
-                    },
+                    populate: ["parent_directory"],
                 },
             });
 

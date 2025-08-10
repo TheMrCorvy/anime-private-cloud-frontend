@@ -6,6 +6,7 @@ import generateNavbarItems from "@/services/generateNavbarItems";
 import { StrapiService } from "@/services/StrapiService";
 import { Directory } from "@/types/StrapiSDK";
 import { CookiesList, getCookie, JwtCookie, UserCookie } from "@/utils/cookies";
+import filterDirectoriesWithParents from "@/utils/filterDirectoriesWithParenrts";
 import { WebRoutes } from "@/utils/routes";
 
 import { Fragment } from "react";
@@ -28,26 +29,23 @@ export default async function Home() {
 
         if (jwt && typeof jwt.jwt === "string") {
             const service = StrapiService();
-            const directories = await service.getDirectories({
+            const directoriesResponse = (await service.getAllDirectories({
                 jwt: jwt.jwt,
                 queryParams: {
-                    filters: {
-                        parent_directory: {
-                            $null: true,
-                        },
-                        adult: {
-                            $eq: false,
-                        },
-                    },
+                    populate: ["parent_directory"],
                 },
-            });
+            })) as any;
+
+            const directories = filterDirectoriesWithParents(
+                directoriesResponse.data
+            );
 
             return {
-                sidebar: directories.data.map((dir) => ({
+                sidebar: directories.map((dir) => ({
                     url: WebRoutes.directory + dir.documentId,
                     label: dir.display_name,
                 })),
-                directories: directories.data,
+                directories: directories,
             };
         }
 

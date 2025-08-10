@@ -11,6 +11,7 @@ import { WebRoutes } from "@/utils/routes";
 
 import { Fragment } from "react";
 import generateNavbarItems from "@/services/generateNavbarItems";
+import filterDirectoriesWithParents from "@/utils/filterDirectoriesWithParenrts";
 
 export const metadata: Metadata = {
     title: "Anime Server",
@@ -34,7 +35,7 @@ export default async function RootLayout({
 
         if (jwt && typeof jwt.jwt === "string") {
             const service = StrapiService();
-            const directories = await service.getDirectories({
+            const directoriesResponse = await service.getAllDirectories({
                 jwt: jwt.jwt,
                 queryParams: {
                     filters: {
@@ -48,7 +49,11 @@ export default async function RootLayout({
                 },
             });
 
-            return directories.data.map((dir) => ({
+            const directories = filterDirectoriesWithParents(
+                directoriesResponse.data
+            );
+
+            return directories.map((dir) => ({
                 url: WebRoutes.directory + dir.documentId,
                 label: dir.display_name,
             }));

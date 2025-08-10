@@ -23,6 +23,8 @@ export enum StrapiApiRoutes {
     animeEpisodes = "/api/anime-episodes/",
     singleDirectory = "/api/directories/",
     directories = "/api/directories/",
+    allDirectories = "/api/directories/all/",
+    allAnimeEpisodes = "/api/anime-episodes/all/",
 }
 
 export enum NasApiRoutes {

@@ -15,10 +15,8 @@ describe("DirectoriesSidebar", () => {
     it("should render inner components", () => {
         render(<DirectoriesSidebar directories={mockedDirectories} />);
 
-        const firstItem = screen.getByText(mockedDirectories[0].label);
-        const lastItem = screen.getByText(
-            mockedDirectories[mockedDirectories.length - 1].label
-        );
+        const firstItem = screen.getByText("E");
+        const lastItem = screen.getByText("T");
 
         expect(firstItem).toBeInTheDocument();
         expect(lastItem).toBeInTheDocument();

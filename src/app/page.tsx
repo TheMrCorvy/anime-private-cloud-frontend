@@ -5,8 +5,8 @@ import TopNavigation from "@/components/layout/TopNavigation";
 import generateNavbarItems from "@/services/generateNavbarItems";
 import { StrapiService } from "@/services/StrapiService";
 import { Directory } from "@/types/StrapiSDK";
-import { CookiesList, getCookie, JwtCookie, UserCookie } from "@/utils/cookies";
-import filterDirectoriesWithParents from "@/utils/filterDirectoriesWithParenrts";
+import { CookiesList, getCookie, JwtCookie } from "@/utils/cookies";
+import { filterDirectoriesWithParents } from "@/utils/filterDirectoriesWithParents";
 import { WebRoutes } from "@/utils/routes";
 
 import { Fragment } from "react";

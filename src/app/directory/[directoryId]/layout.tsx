@@ -11,7 +11,7 @@ import { WebRoutes } from "@/utils/routes";
 
 import { Fragment } from "react";
 import generateNavbarItems from "@/services/generateNavbarItems";
-import filterDirectoriesWithParents from "@/utils/filterDirectoriesWithParenrts";
+import { filterDirectoriesWithParents } from "@/utils/filterDirectoriesWithParents";
 
 export const metadata: Metadata = {
     title: "Anime Server",

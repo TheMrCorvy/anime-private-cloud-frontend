@@ -31,7 +31,7 @@ const DirectoriesSidebar: FC<Props> = ({ directories }) => {
             className="w-[15rem] relative scrollbar-thin"
             data-testid="directories-sidebar"
         >
-            <div className="sticky top-20 left-0 pt-1 pb-2 px-3 bg-blue-500 rounded-md shadow-lg z-10">
+            <div className="pt-1 pb-2 px-3 bg-blue-500 rounded-md shadow-lg z-10">
                 <h3 className="text-xl mt-2 text-white">Animes Disponibles</h3>
             </div>
             <Divider className="my-3" />

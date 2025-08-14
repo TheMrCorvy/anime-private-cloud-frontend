@@ -4,29 +4,29 @@ import MainContainer from "./index";
 import MockedContent from "@/mocks/contentForContainer";
 
 describe("MainContainer", () => {
-	it("should render properly", () => {
-		render(
-			<MainContainer>
-				<MockedContent />
-			</MainContainer>
-		);
+    it("should render properly", () => {
+        render(
+            <MainContainer>
+                <MockedContent />
+            </MainContainer>
+        );
 
-		const container = screen.queryByTestId("main-container");
+        const container = screen.queryByTestId("main-container");
 
-		expect(container).toBeInTheDocument();
-	});
+        expect(container).toBeInTheDocument();
+    });
 
-	it("should render inner components", () => {
-		render(
-			<MainContainer>
-				<MockedContent amountOfItems={10} />
-			</MainContainer>
-		);
+    it("should render inner components", () => {
+        render(
+            <MainContainer>
+                <MockedContent amountOfItems={10} />
+            </MainContainer>
+        );
 
-		const firstItem = screen.queryByTestId("mocked-content-0");
-		const lastItem = screen.queryByTestId("mocked-content-9");
+        const firstItem = screen.queryByTestId("mocked-content-0");
+        const lastItem = screen.queryByTestId("mocked-content-9");
 
-		expect(firstItem).toBeInTheDocument();
-		expect(lastItem).toBeInTheDocument();
-	});
+        expect(firstItem).toBeInTheDocument();
+        expect(lastItem).toBeInTheDocument();
+    });
 });

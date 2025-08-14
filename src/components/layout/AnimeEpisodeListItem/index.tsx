@@ -1,10 +1,10 @@
+"use client";
+
 import { FC } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { WebRoutes } from "@/utils/routes";
-
 import { Card, CardHeader } from "@nextui-org/react";
-
 import Video from "@/components/icons/Video";
 
 interface Props {
@@ -12,11 +12,18 @@ interface Props {
     displayName: string;
 }
 
-const AnimeEpisodeListItem: FC<Props> = ({ episodeId, displayName }) => (
-    <a href={WebRoutes.animeEpisode + episodeId}>
+const AnimeEpisodeListItem: FC<Props> = ({ episodeId, displayName }) => {
+    const router = useRouter();
+
+    const handlePress = () => {
+        router.push(WebRoutes.animeEpisode + episodeId);
+    };
+
+    return (
         <Card
             className="py-4 bg-cyan-800 hover:scale-105 w-full"
             isPressable
+            onPress={handlePress}
             data-testid="test-anime-episode-list-item"
         >
             <CardHeader className="py-2 px-4 flex-row items-start">
@@ -26,7 +33,7 @@ const AnimeEpisodeListItem: FC<Props> = ({ episodeId, displayName }) => (
                 <Video size={24} color="currentColor" className="ml-7 mt-1" />
             </CardHeader>
         </Card>
-    </a>
-);
+    );
+};
 
 export default AnimeEpisodeListItem;

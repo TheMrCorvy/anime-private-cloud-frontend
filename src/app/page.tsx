@@ -8,6 +8,7 @@ import { Directory } from "@/types/StrapiSDK";
 import { CookiesList, getCookie, JwtCookie } from "@/utils/cookies";
 import { filterDirectoriesWithParents } from "@/utils/filterDirectoriesWithParents";
 import { WebRoutes } from "@/utils/routes";
+import { sortDirectories } from "@/utils/sort";
 
 import { Fragment } from "react";
 
@@ -45,7 +46,7 @@ export default async function Home() {
                     url: WebRoutes.directory + dir.documentId,
                     label: dir.display_name,
                 })),
-                directories: directories,
+                directories: sortDirectories(directories),
             };
         }
 

@@ -9,6 +9,7 @@ import { Directory, RoleTypes } from "@/types/StrapiSDK";
 import { Link, Divider } from "@nextui-org/react";
 import DirectoryListItem from "@/components/layout/DirectoryListItem";
 import AnimeEpisodeListItem from "@/components/layout/AnimeEpisodeListItem";
+import { sortAnimeEpisodes, sortDirectories } from "@/utils/sort";
 
 export default async function Directories({ params }: Page) {
     const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
@@ -37,6 +38,13 @@ export default async function Directories({ params }: Page) {
     if (foundDirectory.adult && user.role.type === RoleTypes.ANIME_WATCHER) {
         return notFound();
     }
+
+    const sortedSubDirectories = sortDirectories(
+        foundDirectory.sub_directories || []
+    );
+    const sortedAnimeEpisodes = sortAnimeEpisodes(
+        foundDirectory.anime_episodes || []
+    );
 
     return (
         <article className="flex flex-col">
@@ -76,7 +84,7 @@ export default async function Directories({ params }: Page) {
             </section>
             <Divider className="mb-8" />
             <section>
-                {foundDirectory.sub_directories?.map((subDir, i) => (
+                {sortedSubDirectories.map((subDir, i) => (
                     <DirectoryListItem
                         key={"sub-directory-" + subDir.documentId + "-" + i}
                         directoryId={subDir.documentId}
@@ -86,7 +94,7 @@ export default async function Directories({ params }: Page) {
             </section>
             <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 ">
                 {foundDirectory.anime_episodes &&
-                    foundDirectory.anime_episodes.map((ep, i) => (
+                    sortedAnimeEpisodes.map((ep, i) => (
                         <AnimeEpisodeListItem
                             key={"anime-episode-" + ep.id + "-" + i}
                             episodeId={ep.documentId}

@@ -1,8 +1,7 @@
 "use client";
 
-import { HttpMethod } from "@/services/HttpBase";
+import { useMemo } from "react";
 import { NasApiRoutes } from "@/utils/routes";
-import { useEffect, useState } from "react";
 
 interface SecureVideoPlayerProps {
     apiKey: string;
@@ -15,61 +14,25 @@ const SecureVideoPlayer: React.FC<SecureVideoPlayerProps> = ({
     filePath,
     baseUrl,
 }) => {
-    const [videoBlobUrl, setVideoBlobUrl] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        fetchVideo();
-
-        return () => {
-            if (videoBlobUrl) {
-                URL.revokeObjectURL(videoBlobUrl);
-            }
-        };
-    }, [apiKey, filePath]);
-
-    const fetchVideo = async () => {
-        try {
-            const res = await fetch(baseUrl + NasApiRoutes.serveAnimeEpisode, {
-                headers: {
-                    Authorization: `Bearer ${apiKey}`,
-                    "Content-Type": "application/json",
-                },
-                method: HttpMethod.POST,
-                body: JSON.stringify({
-                    filePath,
-                }),
-            });
-
-            if (!res.ok) {
-                throw new Error(`Failed to fetch video: ${res.status}`);
-            }
-
-            const blob = await res.blob();
-            const url = URL.createObjectURL(blob);
-            setVideoBlobUrl(url);
-        } catch (err: any) {
-            console.error("Error fetching video:", err);
-            setError(err.message || "Failed to load video.");
-        }
-    };
-
-    if (error) return <p>Error loading video: {error}</p>;
+    // Build a streaming URL with query params instead of fetching the entire file
+    const videoUrl = useMemo(() => {
+        const url = new URL(baseUrl + NasApiRoutes.serveAnimeEpisode);
+        url.searchParams.append("filePath", filePath);
+        url.searchParams.append("apiKey", apiKey);
+        return url.toString();
+    }, [apiKey, filePath, baseUrl]);
 
     return (
         <div>
-            {videoBlobUrl ? (
-                <video
-                    controls
-                    width="800"
-                    src={videoBlobUrl}
-                    style={{ maxWidth: "100%" }}
-                >
-                    Your browser does not support the video tag.
-                </video>
-            ) : (
-                <p>Loading video...</p>
-            )}
+            <video
+                controls
+                width="800"
+                style={{ maxWidth: "100%" }}
+                src={videoUrl}
+                preload="metadata"
+            >
+                Your browser does not support the video tag.
+            </video>
         </div>
     );
 };

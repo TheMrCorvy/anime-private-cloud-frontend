@@ -15,7 +15,7 @@ const SignInTicket: FC<Props> = ({ isRegisterForm, registerToken, error }) => {
     return (
         <section
             data-testid="sign-in-ticket"
-            className="bg-pink-400 shadow-xl shadow-slate-800/90 w-[20rem] lg:h-[20rem] h-full lg:w-full rounded-3xl overflow-hidden flex flex-col justify-center lg:flex-row lg:justify-start relative padding-5"
+            className="bg-pink-400 shadow-xl mb-[35rem] lg:mb-0 shadow-slate-800/90 w-[20rem] lg:h-[20rem] h-full lg:w-full rounded-3xl overflow-hidden flex flex-col justify-center lg:flex-row lg:justify-start relative padding-5"
         >
             <Invitation
                 isRegisterForm={isRegisterForm}

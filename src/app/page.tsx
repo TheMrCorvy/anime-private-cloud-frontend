@@ -4,11 +4,12 @@ import MainContainer from "@/components/layout/MainContainer";
 import TopNavigation from "@/components/layout/TopNavigation";
 import generateNavbarItems from "@/services/generateNavbarItems";
 import { StrapiService } from "@/services/StrapiService";
-import { Directory } from "@/types/StrapiSDK";
+import { Directory, RoleTypes } from "@/types/StrapiSDK";
 import { CookiesList, getCookie, JwtCookie } from "@/utils/cookies";
 import { filterDirectoriesWithParents } from "@/utils/filterDirectoriesWithParents";
 import { WebRoutes } from "@/utils/routes";
 import { sortDirectories } from "@/utils/sort";
+import { redirect } from "next/navigation";
 
 import { Fragment } from "react";
 
@@ -27,6 +28,7 @@ export default async function Home() {
         "use server";
 
         const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
+        const user = (await getCookie(CookiesList.USER)) as any;
 
         if (jwt && typeof jwt.jwt === "string") {
             const service = StrapiService();
@@ -41,12 +43,19 @@ export default async function Home() {
                 directoriesResponse.data
             );
 
+            const filteredDirectories = directories.filter((dir) => {
+                if (dir.adult && user.role.type === RoleTypes.ANIME_WATCHER) {
+                    return false;
+                }
+                return true;
+            });
+
             return {
-                sidebar: directories.map((dir) => ({
+                sidebar: filteredDirectories.map((dir) => ({
                     url: WebRoutes.directory + dir.documentId,
                     label: dir.display_name,
                 })),
-                directories: sortDirectories(directories),
+                directories: sortDirectories(filteredDirectories),
             };
         }
 

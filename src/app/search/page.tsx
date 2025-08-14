@@ -7,6 +7,7 @@ import { WebRoutes } from "@/utils/routes";
 import DirectoryListItem from "@/components/layout/DirectoryListItem";
 import SearchInput from "@/components/SearchInput";
 import { sortDirectories } from "@/utils/sort";
+import { RoleTypes } from "@/types/StrapiSDK";
 
 export default async function Search({ searchParams }: Page) {
     const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
@@ -28,12 +29,19 @@ export default async function Search({ searchParams }: Page) {
         },
     });
 
+    const filteredResult = result.data.filter((directory) => {
+        if (directory.adult && user.role.type === RoleTypes.ANIME_WATCHER) {
+            return false;
+        }
+        return true;
+    });
+
     return (
         <section>
             <div className="mb-5 xs:block md:hidden">
                 <SearchInput defaultValue={searchParams.query as string} />
             </div>
-            {sortDirectories(result.data).map((directory, i) => (
+            {sortDirectories(filteredResult).map((directory, i) => (
                 <DirectoryListItem
                     key={`search-result-page-${directory.id}-${i}`}
                     displayName={directory.display_name}

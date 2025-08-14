@@ -4,7 +4,7 @@ import { Page } from "@/types/nextjs";
 import { StrapiService } from "@/services/StrapiService";
 import { CookiesList, getCookie, JwtCookie, UserCookie } from "@/utils/cookies";
 import { ApiRoutes, WebRoutes } from "@/utils/routes";
-import { AnimeEpisode } from "@/types/StrapiSDK";
+import { AnimeEpisode, RoleTypes } from "@/types/StrapiSDK";
 
 import { Link, Divider } from "@nextui-org/react";
 import {
@@ -37,7 +37,12 @@ export default async function AnimeEpisodes({ params }: Page) {
         },
     });
 
-    if ("error" in animeEpisode) {
+    if (
+        "error" in animeEpisode ||
+        !animeEpisode.data?.parent_directory ||
+        (animeEpisode.data.parent_directory.adult &&
+            user.role.type === RoleTypes.ANIME_WATCHER)
+    ) {
         console.error(animeEpisode);
         return notFound();
     }

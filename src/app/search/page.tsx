@@ -41,6 +41,16 @@ export default async function Search({ searchParams }: Page) {
             <div className="mb-5 xs:block md:hidden">
                 <SearchInput defaultValue={searchParams.query as string} />
             </div>
+            {filteredResult.length === 0 && (
+                <>
+                    <h1 className="w-full text-lg sm:text-xl md:text-3xl text-center font-bold mt-1">
+                        No se vos, pero yo no veo que esté...
+                    </h1>
+                    <h3 className="w-full text-md sm:text-lg md:text-2xl italic text-center mt-2">
+                        {`"${searchParams.query}"`}
+                    </h3>
+                </>
+            )}
             {sortDirectories(filteredResult).map((directory, i) => (
                 <DirectoryListItem
                     key={`search-result-page-${directory.id}-${i}`}

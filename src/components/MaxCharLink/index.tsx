@@ -46,6 +46,16 @@ const MaxCharLink: FC<Props> = ({
         }
     }, [label, maxCharacters]);
 
+    useEffect(() => {
+        let timeout: NodeJS.Timeout | undefined;
+        if (isOpen) {
+            timeout = setTimeout(() => setIsOpen(false), 3500);
+        }
+        return () => {
+            if (timeout) clearTimeout(timeout);
+        };
+    }, [isOpen]);
+
     if (label.length < maxCharacters && !linkLabel) {
         return (
             <Link

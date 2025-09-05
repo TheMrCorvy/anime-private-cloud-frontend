@@ -7,6 +7,7 @@ import { notFound, redirect } from "next/navigation";
 import { WebRoutes } from "@/utils/routes";
 
 import { Fragment } from "react";
+import PasswordInput from "./PasswordInput";
 
 interface Props {
     isRegisterForm: boolean;
@@ -99,13 +100,12 @@ const SignInForm: FC<Props> = ({ isRegisterForm, tokenId, errorMessage }) => {
                         name="email"
                         data-testid="sign-in-email"
                     />
-                    <Input
+                    <PasswordInput
                         isRequired
-                        type="password"
-                        label="Contraseña"
                         className="max-w-xs"
                         color="danger"
                         name="password"
+                        label="Contraseña"
                     />
                 </Fragment>
             );
@@ -122,13 +122,12 @@ const SignInForm: FC<Props> = ({ isRegisterForm, tokenId, errorMessage }) => {
                     name="identifier"
                     data-testid="sign-in-identifier"
                 />
-                <Input
+                <PasswordInput
                     isRequired
-                    type="password"
-                    label="Contraseña"
                     className="max-w-xs"
                     color="danger"
                     name="password"
+                    label="Contraseña"
                 />
             </Fragment>
         );

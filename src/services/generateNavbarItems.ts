@@ -4,8 +4,8 @@ import { RoleTypes } from "@/types/StrapiSDK";
 import { CookiesList, getCookie, UserCookie } from "@/utils/cookies";
 import { WebRoutes } from "@/utils/routes";
 
-const generateNavbarItems = () => {
-    const userObject = getCookie(CookiesList.USER) as UserCookie | null;
+const generateNavbarItems = async () => {
+    const userObject = (await getCookie(CookiesList.USER)) as UserCookie | null;
 
     const newLink: NavbarSection = {
         items: [

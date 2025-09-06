@@ -11,22 +11,23 @@ import { NasService } from "@/services/NasService";
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { animeEpisodeId: string } }
+    { params }: { params: Promise<{ animeEpisodeId: string }> }
 ) {
+    const resolvedParams = await params;
     logData({
         data: {
-            animeEpisodeId: params.animeEpisodeId,
+            animeEpisodeId: resolvedParams.animeEpisodeId,
         },
         ff: FeatureNames.LOG_INTERNAL_HTTP_REQUESTS,
         title: "/stream-anime-episode/[animeEpisodeId]",
     });
 
-    const jwt = getCookie(CookiesList.JWT) as JwtCookie | null;
+    const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
 
     const service = StrapiService();
     const animeEpisode = await service.getSingleAnimeEpisode({
         jwt: jwt?.jwt || "",
-        id: params.animeEpisodeId,
+        id: resolvedParams.animeEpisodeId,
     });
 
     const nasService = NasService();

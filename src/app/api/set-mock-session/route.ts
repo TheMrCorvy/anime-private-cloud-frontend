@@ -3,8 +3,9 @@ import {
     FeatureNames,
     isFeatureFlagEnabled,
 } from "@/services/featureFlagService";
-import { CookiesList, setCookie } from "@/utils/cookies";
+import { CookiesList } from "@/utils/cookies";
 import { NextRequest, NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export async function GET(req: NextRequest) {
     const host = req.headers.get("host");
@@ -17,8 +18,32 @@ export async function GET(req: NextRequest) {
         return response;
     }
 
-    setCookie(CookiesList.USER, mockMeResponse);
-    setCookie(CookiesList.JWT, { jwt: mockUserToken });
+    // In API routes, we can set cookies directly
+    const cookieStore = await cookies();
+
+    // Set User cookie
+    cookieStore.set(
+        CookiesList.USER,
+        JSON.stringify({ cookieObject: mockMeResponse }),
+        {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: "/",
+        }
+    );
+
+    // Set JWT cookie
+    cookieStore.set(
+        CookiesList.JWT,
+        JSON.stringify({ cookieObject: { jwt: mockUserToken } }),
+        {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            path: "/",
+        }
+    );
 
     return response;
 }

@@ -11,8 +11,8 @@ jest.mock("next/image", () => mockNextImage);
 jest.mock("next/server", () => mockNextServer);
 jest.mock("next/link", () => mockNextLink);
 
-// Mock NextUI ripple component to avoid animation issues in tests
-jest.mock("@nextui-org/ripple", () => ({
+// Mock HeroUI ripple component to avoid animation issues in tests
+jest.mock("@heroui/ripple", () => ({
     Ripple: ({ children }: { children: React.ReactNode }) => children,
     useRipple: () => {
         const rippleHandler = jest.fn();

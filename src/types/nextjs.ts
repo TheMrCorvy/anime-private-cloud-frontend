@@ -1,4 +1,8 @@
 export interface Page {
-    params: { slug: string; directoryId: string; animeEpisodeId: string };
-    searchParams: { [key: string]: string | string[] | undefined };
+    params: Promise<{
+        slug: string;
+        directoryId: string;
+        animeEpisodeId: string;
+    }>;
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }

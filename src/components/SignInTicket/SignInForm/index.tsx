@@ -12,11 +12,6 @@ interface Props {
 }
 
 const SignInForm: FC<Props> = ({ isRegisterForm, tokenId, errorMessage }) => {
-    // Use the appropriate server action based on form type
-    const handleSubmit = isRegisterForm
-        ? handleRegister.bind(null, tokenId as string)
-        : handleLogin;
-
     const inputs = () => {
         if (isRegisterForm) {
             return (

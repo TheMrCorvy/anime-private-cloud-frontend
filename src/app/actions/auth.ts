@@ -1,13 +1,13 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { CookiesList, JwtCookie, UserCookie } from "@/utils/cookies";
+import { CookiesList, UserCookie } from "@/utils/cookies";
 import {
     FeatureNames,
     isFeatureFlagEnabled,
 } from "@/services/featureFlagService";
 import { StrapiService } from "@/services/StrapiService";
-import { RegisterResponse, LoginResponse, RoleTypes } from "@/types/StrapiSDK";
+import { RoleTypes } from "@/types/StrapiSDK";
 import { notFound, redirect } from "next/navigation";
 import { WebRoutes } from "@/utils/routes";
 

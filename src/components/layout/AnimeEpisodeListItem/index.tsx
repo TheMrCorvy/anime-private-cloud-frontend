@@ -4,7 +4,7 @@ import { FC } from "react";
 import { useRouter } from "next/navigation";
 
 import { WebRoutes } from "@/utils/routes";
-import { Card, CardHeader } from "@nextui-org/react";
+import { Card, CardHeader } from "@heroui/react";
 import Video from "@/components/icons/Video";
 
 interface Props {

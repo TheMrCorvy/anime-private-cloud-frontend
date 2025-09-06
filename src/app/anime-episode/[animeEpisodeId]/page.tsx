@@ -6,7 +6,7 @@ import { CookiesList, getCookie, JwtCookie, UserCookie } from "@/utils/cookies";
 import { ApiRoutes, WebRoutes } from "@/utils/routes";
 import { AnimeEpisode, RoleTypes } from "@/types/StrapiSDK";
 
-import { Link, Divider } from "@nextui-org/react";
+import { Link, Divider } from "@heroui/react";
 import {
     FeatureNames,
     isFeatureFlagEnabled,
@@ -14,6 +14,7 @@ import {
 import SecureVideoPlayer from "@/components/SecureVideoPlayer";
 
 export default async function AnimeEpisodes({ params }: Page) {
+    const resolvedParams = await params;
     const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
     const user = (await getCookie(CookiesList.USER)) as UserCookie | null;
     const consumeNasData = isFeatureFlagEnabled(FeatureNames.CONSUME_NAS_FILES);
@@ -31,7 +32,7 @@ export default async function AnimeEpisodes({ params }: Page) {
     const service = StrapiService();
     const animeEpisode = await service.getSingleAnimeEpisode({
         jwt: jwt.jwt,
-        id: params.animeEpisodeId,
+        id: resolvedParams.animeEpisodeId,
         queryParams: {
             populate: ["parent_directory"],
         },

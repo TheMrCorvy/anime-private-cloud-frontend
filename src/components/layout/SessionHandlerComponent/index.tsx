@@ -1,22 +1,13 @@
 import { FC } from "react";
 
-import { Button, Link } from "@nextui-org/react";
-import { CookiesList, getCookie, removeCookie } from "@/utils/cookies";
-import { redirect } from "next/navigation";
+import { Button, Link } from "@heroui/react";
+import { CookiesList, getCookie } from "@/utils/cookies";
+import { handleLogout } from "@/app/actions/auth";
 
 import { WebRoutes } from "@/utils/routes";
 
 const SessionHandlerComponent: FC = async () => {
     const session = await getCookie(CookiesList.USER);
-
-    const handleLogout = async () => {
-        "use server";
-
-        removeCookie(CookiesList.USER);
-        removeCookie(CookiesList.JWT);
-
-        redirect(WebRoutes.login);
-    };
 
     if (session) {
         return (

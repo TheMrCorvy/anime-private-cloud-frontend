@@ -8,7 +8,7 @@ import {
     NavbarMenuItem,
     NavbarMenuToggle,
     NavbarMenu,
-} from "@nextui-org/react";
+} from "@heroui/react";
 
 export interface NavbarItem {
     label: string;

@@ -6,12 +6,13 @@ import { CookiesList, getCookie, JwtCookie, UserCookie } from "@/utils/cookies";
 import { WebRoutes } from "@/utils/routes";
 import { Directory, RoleTypes } from "@/types/StrapiSDK";
 
-import { Link, Divider } from "@nextui-org/react";
+import { Link, Divider } from "@heroui/react";
 import DirectoryListItem from "@/components/layout/DirectoryListItem";
 import AnimeEpisodeListItem from "@/components/layout/AnimeEpisodeListItem";
 import { sortAnimeEpisodes, sortDirectories } from "@/utils/sort";
 
 export default async function Directories({ params }: Page) {
+    const resolvedParams = await params;
     const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
     const user = (await getCookie(CookiesList.USER)) as UserCookie | null;
 
@@ -22,7 +23,7 @@ export default async function Directories({ params }: Page) {
     const service = StrapiService();
     const directory = await service.getSingleDirectory({
         jwt: jwt.jwt,
-        id: params.directoryId,
+        id: resolvedParams.directoryId,
         queryParams: {
             populate: ["anime_episodes", "parent_directory", "sub_directories"],
         },

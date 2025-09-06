@@ -1,10 +1,6 @@
 import { FC } from "react";
-import { Input, Button } from "@nextui-org/react";
-import { StrapiService } from "@/services/StrapiService";
-import { RegisterResponse, LoginResponse, RoleTypes } from "@/types/StrapiSDK";
-import { CookiesList, setCookie } from "@/utils/cookies";
-import { notFound, redirect } from "next/navigation";
-import { WebRoutes } from "@/utils/routes";
+import { Input, Button } from "@heroui/react";
+import { handleLogin, handleRegister } from "@/app/actions/auth";
 
 import { Fragment } from "react";
 import PasswordInput from "./PasswordInput";
@@ -16,68 +12,10 @@ interface Props {
 }
 
 const SignInForm: FC<Props> = ({ isRegisterForm, tokenId, errorMessage }) => {
-    const handleSubmit = async (formData: FormData) => {
-        "use server";
-        const service = StrapiService();
-
-        let serverResponse: RegisterResponse | LoginResponse;
-
-        if (isRegisterForm) {
-            serverResponse = await service.register({
-                email: formData.get("email") as string,
-                username: formData.get("username") as string,
-                password: formData.get("password") as string,
-            });
-        } else {
-            serverResponse = await service.login({
-                identifier: formData.get("identifier") as string,
-                password: formData.get("password") as string,
-            });
-        }
-
-        if (!serverResponse.ok || serverResponse.error) {
-            console.error(serverResponse.error);
-            console.log(serverResponse.error?.message);
-
-            if (
-                serverResponse.error?.name &&
-                serverResponse.error?.name === "ValidationError"
-            ) {
-                return redirect(
-                    `${WebRoutes.login}?rejectionReason=${serverResponse.error?.message}`
-                );
-            } else {
-                return notFound();
-            }
-        }
-
-        const userWithRole = await service.me({
-            jwt: serverResponse.jwt,
-            queryParams: {
-                populate: "role",
-            },
-        });
-
-        setCookie(CookiesList.JWT, { jwt: serverResponse.jwt });
-        setCookie(CookiesList.USER, userWithRole);
-
-        if (isRegisterForm) {
-            await service.invalidateRegisterToken({
-                tokenId: tokenId as string,
-            });
-        }
-
-        if (
-            !("role" in userWithRole) ||
-            (userWithRole.role.type !== RoleTypes.ADULT_ANIME_WATCHER &&
-                userWithRole.role.type !== RoleTypes.ANIME_WATCHER &&
-                userWithRole.role.type !== RoleTypes.ANIME_PAGE_ADMIN)
-        ) {
-            return redirect(WebRoutes.pendingUserActivation);
-        }
-
-        return redirect(WebRoutes.home);
-    };
+    // Use the appropriate server action based on form type
+    const handleSubmit = isRegisterForm
+        ? handleRegister.bind(null, tokenId as string)
+        : handleLogin;
 
     const inputs = () => {
         if (isRegisterForm) {
@@ -140,7 +78,15 @@ const SignInForm: FC<Props> = ({ isRegisterForm, tokenId, errorMessage }) => {
                 className="w-full lg:h-full h-4/12 lg:w-4/12 border-dashed border-white border-t-3 lg:border-t-0 lg:border-l-3"
             >
                 <form
-                    action={handleSubmit}
+                    action={
+                        isRegisterForm
+                            ? async (formData: FormData) =>
+                                  await handleRegister(
+                                      formData,
+                                      tokenId as string
+                                  )
+                            : handleLogin
+                    }
                     className="flex flex-col h-full gap-6 p-6 justify-center items-center text-center content-center"
                 >
                     {inputs()}

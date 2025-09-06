@@ -10,6 +10,7 @@ import { sortDirectories } from "@/utils/sort";
 import { RoleTypes } from "@/types/StrapiSDK";
 
 export default async function Search({ searchParams }: Page) {
+    const resolvedSearchParams = await searchParams;
     const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
     const user = (await getCookie(CookiesList.USER)) as UserCookie | null;
 
@@ -23,7 +24,7 @@ export default async function Search({ searchParams }: Page) {
         queryParams: {
             filters: {
                 display_name: {
-                    $contains: searchParams.query as string,
+                    $contains: resolvedSearchParams.query as string,
                 },
             },
         },
@@ -39,7 +40,9 @@ export default async function Search({ searchParams }: Page) {
     return (
         <section>
             <div className="mb-5 xs:block md:hidden">
-                <SearchInput defaultValue={searchParams.query as string} />
+                <SearchInput
+                    defaultValue={resolvedSearchParams.query as string}
+                />
             </div>
             {filteredResult.length === 0 && (
                 <>
@@ -47,7 +50,7 @@ export default async function Search({ searchParams }: Page) {
                         No se vos, pero yo no veo que esté...
                     </h1>
                     <h3 className="w-full text-md sm:text-lg md:text-2xl italic text-center mt-2">
-                        {`"${searchParams.query}"`}
+                        {`"${resolvedSearchParams.query}"`}
                     </h3>
                 </>
             )}

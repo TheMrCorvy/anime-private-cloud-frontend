@@ -13,6 +13,8 @@ import {
 import { Fragment } from "react";
 
 export default async function Register({ searchParams }: Page) {
+    const resolvedSearchParams = await searchParams;
+
     if (!isFeatureFlagEnabled(FeatureNames.ENABLE_USERS_REGISTER)) {
         return notFound();
     }
@@ -24,7 +26,9 @@ export default async function Register({ searchParams }: Page) {
         return redirect(WebRoutes.home);
     }
 
-    const invitationCode = searchParams.invitation as string | undefined;
+    const invitationCode = resolvedSearchParams.invitation as
+        | string
+        | undefined;
 
     if (!invitationCode) {
         return notFound();

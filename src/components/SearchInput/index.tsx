@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input } from "@heroui/react";
 import { redirect } from "next/navigation";
 import SearchTwoLines from "../icons/SearchTwoLines";
 import { WebRoutes } from "@/utils/routes";

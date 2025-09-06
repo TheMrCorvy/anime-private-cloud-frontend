@@ -2,8 +2,8 @@
 
 import { FC, useState, useEffect } from "react";
 
-import { Link } from "@nextui-org/link";
-import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/react";
+import { Link } from "@heroui/link";
+import { Popover, PopoverTrigger, PopoverContent } from "@heroui/react";
 
 interface Props {
     url: string;

@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Input, Button } from "@nextui-org/react";
+import { Input, Button } from "@heroui/react";
 
 interface Props {
     isRequired?: boolean;

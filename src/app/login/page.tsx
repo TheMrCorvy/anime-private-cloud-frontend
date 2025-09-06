@@ -9,6 +9,7 @@ import { Fragment } from "react";
 import { Page } from "@/types/nextjs";
 
 export default async function Login({ searchParams }: Page) {
+    const resolvedSearchParams = await searchParams;
     const jwt = await getCookie(CookiesList.JWT);
     const user = await getCookie(CookiesList.USER);
 
@@ -26,7 +27,9 @@ export default async function Login({ searchParams }: Page) {
                     </h1>
                     <SignInTicket
                         error={
-                            searchParams.rejectionReason as string | undefined
+                            resolvedSearchParams.rejectionReason as
+                                | string
+                                | undefined
                         }
                     />
                 </Fragment>

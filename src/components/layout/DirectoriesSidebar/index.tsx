@@ -2,7 +2,7 @@
 
 import { FC, Fragment } from "react";
 
-import { Divider, Accordion, AccordionItem } from "@nextui-org/react";
+import { Divider, Accordion, AccordionItem } from "@heroui/react";
 import MaxCharLink from "@/components/MaxCharLink";
 import organizedDirectories from "@/utils/filterDirectoriesWithParents";
 import { WebRoutes } from "@/utils/routes";

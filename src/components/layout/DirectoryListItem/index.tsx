@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { WebRoutes } from "@/utils/routes";
 
-import { Divider, Tooltip, Link } from "@nextui-org/react";
+import { Divider, Tooltip, Link } from "@heroui/react";
 import WarningLine from "@/components/icons/WarningLine";
 import Folder from "@/components/icons/Folder";
 

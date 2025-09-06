@@ -30,10 +30,6 @@ export default async function Home() {
         const jwt = (await getCookie(CookiesList.JWT)) as JwtCookie | null;
         const user = (await getCookie(CookiesList.USER)) as any;
 
-        console.clear();
-        console.log("JWT Cookie:", jwt);
-        console.log("User Cookie:", user);
-
         if (jwt && typeof jwt.jwt === "string") {
             const service = StrapiService();
             const directoriesResponse = (await service.getAllDirectories({
